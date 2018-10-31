@@ -4,9 +4,10 @@ MAINTAINER Helmuth Breitenfellner <helmuth@breitenfellner.at>
 
 VOLUME /backup
 VOLUME /ssh-id
+VOLUME /data
 
 ENV BACKUP_NAME=localhost
-ENV BACKUP_SOURCE=/
+ENV BACKUP_SOURCE=/data
 ENV BACKUP_OPTS=one_fs=1
 ENV BACKUP_HOURLY=0
 ENV BACKUP_DAILY=3
