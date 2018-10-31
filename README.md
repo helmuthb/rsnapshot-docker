@@ -30,6 +30,9 @@ This is the name of the backup source you are backing up. Default is `/data` whi
 **BACKUP_OPTS**
 This allows you to add further `rsnapshot` options to the backup. The default value is `one_fs=1` which will make the backup not cross over filesystems.
 
+**BACKUP_SSH_ARGS**
+This allows you to provide additional values for `ssh_args`. One example could be providing a non-standard port with `-p 222`.
+
 **BACKUP_HOURLY**
 This specifies the number of hourly backups to keep. The default value is `0` which means no hourly backups are performed.
 
@@ -44,3 +47,16 @@ This specifies the number of monthly backups to keep. The default value is `3`.
 
 **BACKUP_YEARLY**
 This specifies the number of yearly backups to keep. The default value is `3`.
+
+Example
+-------
+
+Perform local backup of `/etc`, into `/srv/backup`, naming it `etc-folder`:
+```
+docker run -d -v /etc:/data -v /srv/backup:/backup -e BACKUP_NAME=etc-folder helmuthb/rsnapshot 
+```
+
+Perform remote backup of a remote server `example.com`, filesystem `/home` into `/src/backup`, naming it `remote`:
+```
+docker run -d -v $HOME/.ssh/id_rsa:/ssh-id -v /srv/backup:/backup -e BACKUP_NAME=remote -e BACKUP_SOURCE=root@example.com
+```

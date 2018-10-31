@@ -13,7 +13,7 @@ cmd_cp /bin/cp
 cmd_rm /bin/rm
 cmd_rsync /usr/bin/rsync
 cmd_ssh /usr/bin/ssh
-ssh_args -i /ssh-id -o StrictHostKeychecking=no
+ssh_args -i /ssh-id -o StrictHostKeychecking=no ${BACKUP_SSH_ARGS}
 verbose 1
 lockfile /var/run/rsnapshot.pid
 backup ${BACKUP_SOURCE} ${BACKUP_NAME}/ ${BACKUP_OPTS}
