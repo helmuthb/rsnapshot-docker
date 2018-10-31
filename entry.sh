@@ -51,4 +51,4 @@ then
 fi
 
 # start cron - we should be done!
-/bin/crond -f
+/usr/bin/crond -f
