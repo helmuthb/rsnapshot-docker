@@ -32,7 +32,7 @@ Environment
 -----------
 
 **BACKUP_NAME**
-This is the name of the backup source you are backing up. Default is `localhost` and it will be used as the name of the subfolder in the `/backup` volume.
+This is the name of the backup source you are backing up. Default is `localhost` and it will be used as the name of the subfolder (under the `daily.X` etc folders) in the `/backup` volume.
 
 **BACKUP_SOURCE**
 This is the name of the backup source you are backing up. Default is `/data` which matches the name of the expected volume for local backups; for remote server backups the syntax should be `user@server:/folder`.
