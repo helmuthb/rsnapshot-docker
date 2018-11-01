@@ -6,17 +6,27 @@ The logic is to perform a local backup from either a local folder or a remote se
 
 It allows the following customization:
 
+
 Volumes
 -------
 
 Using the volume `/backup` you provide the target folder for the backups.
 This is mandatory, otherwise backups are done into the ephemeral container disk space.
 
+Using the volume `/data` you can provide the data which shall be backed up.
+This is necessary for performing backups from a local folder and can be ignored for remote backups.
+
+File Mounts
+-----------
+
+The Docker image also expects a few file mounts. They are optional.
+
 Using the volume `/ssh-id` you can provide at runtime an SSH ID.
 This is necessary for performing backups from a remote server and can be ignored for local backups.
 
-Using the volume `/data` you can provide the data which shall be backed up.
-This is necessary for performing backups from a local folder and can be ignored for remote backups.
+Using the volume `/backup.cfg` you can add more backup steps.
+The content is a list of `backup` statements (or other statements from the `rsnapshot` configuration file).
+
 
 Environment
 -----------
@@ -53,10 +63,26 @@ Example
 
 Perform local backup of `/etc`, into `/srv/backup`, naming it `etc-folder`:
 ```
-docker run -d -v /etc:/data -v /srv/backup:/backup -e BACKUP_NAME=etc-folder helmuthb/rsnapshot 
+docker run -d -v /etc:/data -v /srv/backup:/backup \
+           -e BACKUP_NAME=etc-folder helmuthb/rsnapshot 
 ```
 
 Perform remote backup of a remote server `example.com`, filesystem `/home` into `/src/backup`, naming it `remote`:
 ```
-docker run -d -v $HOME/.ssh/id_rsa:/ssh-id -v /srv/backup:/backup -e BACKUP_NAME=remote -e BACKUP_SOURCE=root@example.com
+docker run -d -v $HOME/.ssh/id_rsa:/ssh-id \
+           -v /srv/backup:/backup \
+           -e BACKUP_NAME=remote \
+           -e BACKUP_SOURCE=root@example.com \
+           helmuthb/rsnapshot
+```
+
+Add a local configuration file `backup.cfg` with more backups:
+```
+backup		/etc	etc-folder/
+backup		/boot	boot-folder/
+backup		/home	home-folder/
+```
+```
+docker run -d -v backup.cfg:/backup.cfg -v /srv/backup:/backup \
+           -e BACKUP_NAME=root -e BACKUP_SOURCE=/ helmuthb/rsnapshot
 ```

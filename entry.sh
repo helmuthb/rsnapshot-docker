@@ -50,5 +50,8 @@ then
   echo "50 13 1 1 * rsnapshot yearly" >> /etc/crontabs/root
 fi
 
+# Add the user-provided config file
+cat /backup.cfg >> /etc/rsnapshot.cfg
+
 # start cron - we should be done!
 /usr/sbin/crond -f
