@@ -16,7 +16,7 @@ ENV BACKUP_YEARLY=3
 
 RUN touch /ssh-id && touch /backup.cfg
 
-RUN apk add --update rsnapshot
+RUN apk add --update rsnapshot tzdata
 
 ADD entry.sh /entry.sh
 
