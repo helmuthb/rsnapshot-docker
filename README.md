@@ -31,32 +31,67 @@ The content is a list of `backup` statements (or other statements from the `rsna
 Environment
 -----------
 
-**BACKUP_NAME**
+**`BACKUP_NAME`**
 This is the name of the backup source you are backing up. Default is `localhost` and it will be used as the name of the subfolder (under the `daily.X` etc folders) in the `/backup` volume.
 
-**BACKUP_SOURCE**
+**`BACKUP_SOURCE`**
 This is the name of the backup source you are backing up. Default is `/data` which matches the name of the expected volume for local backups; for remote server backups the syntax should be `user@server:/folder`.
 
-**BACKUP_OPTS**
+**`BACKUP_OPTS`**
 This allows you to add further `rsnapshot` options to the backup. The default value is `one_fs=1` which will make the backup not cross over filesystems.
 
-**BACKUP_SSH_ARGS**
+**`BACKUP_SSH_ARGS`**
 This allows you to provide additional values for `ssh_args`. One example could be providing a non-standard port with `-p 222`.
 
-**BACKUP_HOURLY**
+**`BACKUP_HOURLY`**
 This specifies the number of hourly backups to keep. The default value is `0` which means no hourly backups are performed.
 
-**BACKUP_DAILY**
+**`BACKUP_DAILY`**
 This specifies the number of daily backups to keep. The default value is `3`.
 
-**BACKUP_WEEKLY**
+**`BACKUP_WEEKLY`**
 This specifies the number of weekly backups to keep. The default value is `3`.
 
-**BACKUP_MONTHLY**
+**`BACKUP_MONTHLY`**
 This specifies the number of monthly backups to keep. The default value is `3`.
 
-**BACKUP_YEARLY**
+**`BACKUP_YEARLY`**
 This specifies the number of yearly backups to keep. The default value is `3`.
+
+**`CRON_HOURLY`**
+This specifies the crontab pattern when the hourly
+backup shall be performed.
+The default value is `0 * * * *`, i.e. every full hour.
+_This setting only is relevant if `BACKUP_HOURLY` is set to a non-zero
+value._
+
+**`CRON_DAILY`**
+This specifies the crontab pattern when the daily
+backup shall be performed.
+The default value is `30 23 * * *`, i.e. at 23:30 (11:30 pm) every night.
+_This setting only is relevant if `BACKUP_HOURLY` is set to a non-zero
+value._
+
+**`CRON_WEEKLY`**
+This specifies the crontab pattern when the weekly
+backup shall be performed.
+The default value is `0 23 * * 0`, i.e. at 23:00 (11pm) every Sunday.
+_This setting only is relevant if `BACKUP_WEEKLY` is set to a non-zero
+value._
+
+**`CRON_MONTHLY`**
+This specifies the crontab pattern when the monthly
+backup shall be performed.
+The default value is `30 22 1 * *`, i.e. at 22:30 (10:30 pm) every first of the month.
+_This setting only is relevant if `BACKUP_MONTHLY` is set to a non-zero
+value._
+
+**`CRON_YEARLY`**
+This specifies the crontab pattern when the yearly
+backup shall be performed.
+The default value is `0 22 1 1 *`, i.e. at 22:00 (10pm) every first January.
+_This setting only is relevant if `BACKUP_YEARLY` is set to a non-zero
+value._
 
 Example
 -------
