@@ -15,6 +15,8 @@ cmd_rsync	/usr/bin/rsync
 cmd_ssh		/usr/bin/ssh
 ssh_args	-i /ssh-id -o StrictHostKeychecking=no ${BACKUP_SSH_ARGS}
 verbose		1
+loglevel	3
+logfile	/var/log/rsnapshot
 lockfile	/var/run/rsnapshot.pid
 backup		${BACKUP_SOURCE}	${BACKUP_NAME}/	${BACKUP_OPTS}
 EOF
