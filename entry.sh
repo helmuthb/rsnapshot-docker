@@ -53,5 +53,8 @@ fi
 # Add the user-provided config file
 cat /backup.cfg >> /etc/rsnapshot.conf
 
+# Test the config
+rsnapshot configtest
+
 # start cron - we should be done!
 /usr/sbin/crond -f
