@@ -54,7 +54,10 @@ fi
 cat /backup.cfg >> /etc/rsnapshot.conf
 
 # Test the config
-rsnapshot configtest
-
-# start cron - we should be done!
-/usr/sbin/crond -f
+CONFIGTEST=$(rsnapshot configtest)
+echo "${CONFIGTEST}"
+if [ "${CONFIGTEST}" = "Syntax OK" ]
+then
+  # Syntax is OK, start cron
+  /usr/sbin/crond -f
+fi
