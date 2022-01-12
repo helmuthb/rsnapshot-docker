@@ -19,8 +19,8 @@ lockfile	/var/run/rsnapshot.pid
 backup		${BACKUP_SOURCE}	${BACKUP_NAME}/	${BACKUP_OPTS}
 EOF
 
-# prepare crontab for root
-touch /etc/crontabs/root
+# prepare and clean crontab for root
+> /etc/crontabs/root
 
 # Dynamic parts - depending on the retain settings
 # This will also create the crontab
