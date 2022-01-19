@@ -19,8 +19,9 @@ lockfile	/var/run/rsnapshot.pid
 backup		${BACKUP_SOURCE}	${BACKUP_NAME}/	${BACKUP_OPTS}
 EOF
 
-# prepare crontab for root
-touch /etc/crontabs/root
+# create empty crontab for root
+# empty file, otherwise the cronjobs will be added with every container start.
+> /etc/crontabs/root
 
 # Dynamic parts - depending on the retain settings
 # This will also create the crontab
